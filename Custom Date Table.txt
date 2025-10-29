@@ -1,0 +1,19 @@
+Custom Date Table 
+
+DateTable = 
+ADDCOLUMNS(
+    CALENDAR(DATE(2024, 1, 1), TODAY()),
+    "mm-yy", FORMAT([Date], "MM-yy"),
+    "Day of Week Name", FORMAT([Date], "dddd"),
+    "Weekend/Weekday", 
+        SWITCH(
+            WEEKDAY([Date], 2),  -- 2: Monday = 1, Sunday = 7
+            6, "Weekend",
+            7, "Weekend",
+            "Weekday"
+        ),
+    "Week Number", WEEKNUM([Date], 2),  -- 2: Monday as first day
+    "Month", FORMAT([Date], "MMMM"),
+    "Quarter", "Q" & FORMAT([Date], "Q"),
+    "Year", YEAR([Date])
+)
